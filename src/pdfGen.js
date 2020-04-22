@@ -114,8 +114,12 @@ export default async function pdfGen(reasons, timeShiftInMin = 45) {
   const blob = new Blob([pdfBytes], { type: "application/pdf" });
   const link = document.createElement("a");
   const url = URL.createObjectURL(blob);
+  const fileNameDate = releaseDate.toLocaleDateString("fr-CA");
+  const fileNameHour = releaseDate
+    .toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })
+    .replace(":", "-");
   link.href = url;
-  link.download = "attestation.pdf";
+  link.download = `attestation-${fileNameDate}_${fileNameHour}.pdf`;
   document.body.appendChild(link);
   link.click();
 }
