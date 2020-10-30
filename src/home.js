@@ -108,6 +108,26 @@ export default function Home({ useHistory }) {
           </Button>
         </Grid>
         <Grid item>
+          <Button
+            id="bttn-sante"
+            variant="contained"
+            component="span"
+            onClick={genPdf.bind(this, "sante")}
+          >
+            Santé
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button
+            id="bttn-enfant"
+            variant="contained"
+            component="span"
+            onClick={genPdf.bind(this, "enfants")}
+          >
+            Enfants
+          </Button>
+        </Grid>
+        <Grid item>
           <div className={classes.slider}>
             <Slider
               value={timeShiftInMin}

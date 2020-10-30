@@ -1,6 +1,6 @@
 import { PDFDocument } from "pdf-lib";
 import QRCode from "qrcode";
-import pdfBase from "./certificate.pdf";
+import pdfBase from "./30-10-2020-attestation-de-deplacement-derogatoire.pdf";
 
 async function generateQR(text) {
   try {
@@ -24,6 +24,8 @@ export default async function pdfGen(reasons, timeShiftInMin = 45) {
 
   const pdfDoc = await PDFDocument.load(certBytes);
   const page1 = pdfDoc.getPages()[0];
+  console.log(page1.getHeight());
+  console.log(page1.getWidth());
   console.log("Done loading");
 
   const config = localStorage.getItem("config");
@@ -51,51 +53,57 @@ export default async function pdfGen(reasons, timeShiftInMin = 45) {
   const releaseMinutes = creationHour.substring(3, 5);
 
   const data = [
-    `Cree le: ${creationDate} a ${creationHour}`,
-    `Nom: ${lastName}`,
-    `Prenom: ${firstName}`,
-    `Naissance: ${dateOfBirthFormatted} a ${cityOfBirth}`,
-    `Adresse: ${address} ${zipCode} ${city}`,
-    `Sortie: ${creationDate} a ${releaseHours}h${releaseMinutes}`,
+    `Cree le: ${creationDate} a ${creationHour};`,
+    `Nom: ${lastName};`,
+    `Prenom: ${firstName};`,
+    `Naissance: ${dateOfBirthFormatted} a ${cityOfBirth};`,
+    `Adresse: ${address} ${zipCode} ${city};`,
+    `Sortie: ${creationDate} a ${releaseHours}h${releaseMinutes};`,
     `Motifs: ${reasons.join("-")}`,
   ].join("; ");
   const drawText = (text, x, y, size = 11) => {
     page1.drawText(text, { x, y, size /*, font */ });
   };
 
-  drawText(`${firstName} ${lastName}`, 123, 686);
-  drawText(dateOfBirthFormatted, 123, 661);
-  drawText(cityOfBirth, 92, 638);
-  drawText(`${address} ${zipCode} ${city}`, 134, 613);
+  drawText(`${firstName} ${lastName}`, 118, 696);
+  drawText(dateOfBirthFormatted, 118, 674);
+  drawText(cityOfBirth, 297, 674);
+  drawText(`${address} ${zipCode} ${city}`, 134, 653);
 
   if (reasons.includes("travail")) {
-    drawText("x", 76, 527, 19);
+    drawText("x", 84, 578, 19);
   }
   if (reasons.includes("courses")) {
-    drawText("x", 76, 478, 19);
+    drawText("x", 84, 532, 19);
+  }
+  if (reasons.includes("sante")) {
+    drawText("x", 84, 477, 19);
   }
   if (reasons.includes("famille")) {
-    drawText("x", 76, 400, 19);
+    drawText("x", 84, 436, 19);
   }
   if (reasons.includes("sport")) {
-    drawText("x", 76, 345, 19);
+    drawText("x", 84, 356, 19);
   }
-  drawText(city, 111, 226);
+  if (reasons.includes("enfants")) {
+    drawText("x", 84, 207, 19);
+  }
+  drawText(city, 105, 176);
 
-  drawText(creationDate, 92, 200);
-  drawText(releaseHours, 200, 201);
-  drawText(releaseMinutes, 220, 201);
+  drawText(creationDate, 90, 153);
+  drawText(`${releaseHours}:${releaseMinutes}`, 262, 153);
 
+  /* 
   drawText("Date de création:", 464, 150, 7);
-  drawText(`${creationDate} à ${creationHour}`, 455, 144, 7);
+  drawText(`${creationDate} à ${creationHour}`, 455, 144, 7); */
 
   const generatedQR = await generateQR(data);
 
   const qrImage = await pdfDoc.embedPng(generatedQR);
 
   page1.drawImage(qrImage, {
-    x: page1.getWidth() - 170,
-    y: 155,
+    x: 440,
+    y: 111,
     width: 100,
     height: 100,
   });
