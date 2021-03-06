@@ -26,7 +26,6 @@ export default function Config({ useHistory }) {
     const storedConfig = localStorage.getItem("config");
     if (storedConfig) {
       console.log("setting config");
-      console.log(config.firstName);
       setConfig(JSON.parse(storedConfig));
     }
   }, [setConfig]);

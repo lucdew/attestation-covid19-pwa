@@ -4,14 +4,33 @@
   "description": "Opiniated Covid19 French travel certificate",
   "main": "index.js",
   "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "lint": "eslint src/*.js",
-    "clean:dist": "rimraf dist",
-    "watch": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "clean:dist": "rimraf dist"
   },
   "author": "Luc Dew",
   "license": "MIT",
   "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^0.2.4",
+    "workbox-background-sync": "^5.1.4",
+    "workbox-broadcast-update": "^5.1.4",
+    "workbox-cacheable-response": "^5.1.4",
+    "workbox-core": "^5.1.4",
+    "workbox-expiration": "^5.1.4",
+    "workbox-google-analytics": "^5.1.4",
+    "workbox-navigation-preload": "^5.1.4",
+    "workbox-precaching": "^5.1.4",
+    "workbox-range-requests": "^5.1.4",
+    "workbox-routing": "^5.1.4",
+    "workbox-strategies": "^5.1.4",
+    "workbox-streams": "^5.1.4",
     "@date-io/core": "^1.3.13",
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/core": "^4.9.11",
@@ -20,29 +39,32 @@
     "date-fns": "^2.12.0",
     "pdf-lib": "^1.4.1",
     "prop-types": "^15.7.2",
-    "qrcode": "^1.4.4",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.1.2"
+    "qrcode": "^1.4.4"
   },
   "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-standard": "^14.1.1",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "parcel-bundler": "^1.12.4",
-    "parcel-plugin-sw-cache": "^0.3.1",
-    "prettier": "^2.0.5",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1",
     "rimraf": "^3.0.2"
   },
-  "browserslist": [
-    "last 1 Chrome version"
-  ],
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "plugin:prettier/recommended"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "cache": {
     "swDest": "attestationcovid19-service-worker.js",
     "globPatterns": [

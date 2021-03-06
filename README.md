@@ -1,6 +1,13 @@
 # Attestation covid19 PWA
 
-## Description
+## Description (Français)
+
+Générateur d'attestation de déplacement covid19 lors de fin de semaine et couvre-feu
+(Maj: 6 Mars 2021).
+
+**Attestation non officielle, pas de garantie**
+
+## Description (English)
 
 French Covid19 travel certificate generator for French residents.
 
@@ -17,4 +24,4 @@ npm i
 npm run build
 ```
 
-Copy the content of the dist folder to a website
+Copy the content of the build folder to a website
